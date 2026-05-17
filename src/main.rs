@@ -27,31 +27,36 @@ fn main() {
             }
 
             let mut ans_input = String::new(); // TODO: string::new()
+
             std::io::stdin().read_line(&mut ans_input).unwrap(); // TODO: :: 系何してる?
             // dbg!(ans_input); // TODO: この文があるとエラー debugの有無でエラー有無はつらたん
 
-            let ans_input = ans_input.trim().parse::<i32>().unwrap();
-
-            match quiz_mode {
-                1 => {
-                    if ans_input == op1 + op2 {
-                        println!("正解");
-                        num_of_correct += 1;
-                        break;
-                    } else {
-                        println!("不正解")
+            let ans_input = ans_input.trim().parse::<i32>().ok();
+            match ans_input {
+                Some(ans_input) => match quiz_mode {
+                    1 => {
+                        if ans_input == op1 + op2 {
+                            println!("正解");
+                            num_of_correct += 1;
+                            break;
+                        } else {
+                            println!("不正解")
+                        }
                     }
-                }
-                2 => {
-                    if ans_input == op1 - op2 {
-                        println!("正解");
-                        num_of_correct += 1;
-                        break;
-                    } else {
-                        println!("不正解")
+                    2 => {
+                        if ans_input == op1 - op2 {
+                            println!("正解");
+                            num_of_correct += 1;
+                            break;
+                        } else {
+                            println!("不正解")
+                        }
                     }
+                    _ => unreachable!(),
+                },
+                None => {
+                    println!("数値を入力してください")
                 }
-                _ => unreachable!(),
             }
         }
     }
