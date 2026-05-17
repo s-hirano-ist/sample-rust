@@ -28,9 +28,20 @@ fn main() {
             deck.push(Card { suit, rank });
         }
     }
-    println!("{:?}", deck);
 
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     deck.shuffle(&mut rng);
-    println!("{:?}", deck);
+    // println!("{:?}", deck);
+
+    let mut hand: Vec<Card> = Vec::new();
+    for _ in 0..5 {
+        hand.push(deck.pop().unwrap());
+    }
+    hand.sort_by(|a, b| a.rank.cmp(&b.rank)); // TODO: この構文何?
+
+    println!("----Hand----");
+
+    for card in hand {
+        println!("{:?} {:}", card.suit, card.rank);
+    }
 }
